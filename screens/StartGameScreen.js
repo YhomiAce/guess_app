@@ -8,12 +8,15 @@ import {
   Keyboard,
   Alert,
 } from "react-native";
+import BodyText from "../components/BodyText";
 import Card from "../components/Card";
+import CustomButton from "../components/CustomButton";
 import CustomText from "../components/CustomText";
 import Input from "../components/Input";
+import TitleText from "../components/TitleText";
 import Colors from "../constants/colors";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ startGame }) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
@@ -50,28 +53,29 @@ const StartGameScreen = () => {
     setConfirmed(true);
     setSelectedNumber(chosenNumber);
     setEnteredValue("");
-    Keyboard.dismiss(); 
+    Keyboard.dismiss();
   };
 
   let confirmedOutput;
   if (confirmed) {
     confirmedOutput = (
-        <Card style={styles.summaryContainer} >
-            <Text>You Selected</Text>
-            <CustomText>
-                {selectedNumber}
-            </CustomText>
-            <Button title="Start Game" />
-        </Card>
+      <Card style={styles.summaryContainer}>
+        <BodyText>You Selected</BodyText>
+        <CustomText>{selectedNumber}</CustomText>
+        {/* <Button title="Start Game" onPress={() => startGame(selectedNumber)} /> */}
+        <CustomButton onClick={() => startGame(selectedNumber)}>
+            Start Game
+        </CustomButton>
+      </Card>
     );
   }
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyBoard}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <BodyText>Select a Number</BodyText>
           <Input
             style={styles.input}
             blurOnSubmit
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
   summaryContainer: {
     marginTop: 20,
     alignItems: "center",
-  }
+  },
 });
 
 export default StartGameScreen;
