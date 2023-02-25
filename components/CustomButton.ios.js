@@ -1,18 +1,26 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  TouchableNativeFeedback,
+  Platform,
+} from "react-native";
 import colors from "../constants/colors";
 
 const CustomButton = (props) => {
   const { onClick } = props;
+
   return (
-    <TouchableOpacity activeOpacity={0.6} onPress={onClick}>
-      <View style={{ ...styles.button, ...props.style }}>
-        <Text style={{ ...styles.buttonText, ...props.textStyle }}>
-          {" "}
-          {props.children}{" "}
-        </Text>
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.6} onPress={onClick}>
+        <View style={{ ...styles.button, ...props.style }}>
+          <Text style={{ ...styles.buttonText, ...props.textStyle }}>
+            {" "}
+            {props.children}{" "}
+          </Text>
+        </View>
+      </TouchableOpacity>
   );
 };
 
